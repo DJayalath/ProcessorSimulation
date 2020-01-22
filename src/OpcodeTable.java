@@ -15,12 +15,12 @@ public class OpcodeTable {
     /**
      * Map from mnemonics to bit patterns
      */
-    private static Map<String, Byte> forward = new Hashtable<String, Byte>();
+    private static Map<String, Byte> forward = new Hashtable<>();
 
     /**
      * Map from bit patterns to mnemonics
      */
-    private static Map<Byte, String> backward = new Hashtable<Byte, String>();
+    private static Map<Byte, String> backward = new Hashtable<>();
 
     /**
      * Assigns instruction set mappings
@@ -35,6 +35,8 @@ public class OpcodeTable {
         OpcodeTable.add("BRP", (byte) 7);
         OpcodeTable.add("BRZ", (byte) 8);
         OpcodeTable.add("BRA", (byte) 9);
+        OpcodeTable.add("OUT", (byte) 10);
+        OpcodeTable.add("END", (byte) 11);
     }
 
     /**
