@@ -2,5 +2,5 @@ LDA #5
 STA #50
 LDA #10
 ADD 50
-OUT
+STA #51
 END
