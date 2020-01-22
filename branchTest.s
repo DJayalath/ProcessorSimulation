@@ -1,0 +1,9 @@
+LDA #1
+STA #50
+LDA #10
+SUB 50
+OUT
+BRZ #7
+BRA #3
+STA #50
+END

@@ -29,6 +29,9 @@ public class Tester {
 
         System.out.print("Running add test... ");
         System.out.print((addTest()) ? "SUCCESS!\n" : "FAIL!\n");
+
+        System.out.print("Running branch test... ");
+        System.out.print((branchTest()) ? " SUCCESS!\n" : " FAIL!\n");
     }
 
     /**
@@ -96,6 +99,24 @@ public class Tester {
         processor.run();
 
         return readOperand(memory.getWord((byte) 51)) == 15;
+    }
+
+    /**
+     * Tests 'branchTest.s' to subtract 1 from 10 until 0
+     * @return True on success
+     */
+    private boolean branchTest() {
+
+        // Initialise memory, processor and compiler
+        Memory memory = new Memory();
+        Compiler compiler = new Compiler(memory);
+        Processor processor = new Processor(memory);
+
+        compiler.compile("branchTest.s");
+
+        processor.run();
+
+        return readOperand(memory.getWord((byte) 50)) == 0;
     }
 
     /**
