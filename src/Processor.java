@@ -160,11 +160,31 @@ public class Processor {
                 break;
             // Print contents of accumulator
             case "OUT":
-                System.out.println(accumulator);
+                System.out.print(accumulator + ",");
                 break;
             // Sets status register to end execution code
             case "END":
                 status = 1;
+                break;
+            // Checks accumulator status and branches if positive
+            case "BRP":
+
+                if (accumulator > 0) {
+                    programCounter = operand;
+                }
+
+                break;
+            // Checks accumulator status and branches if zero
+            case "BRZ":
+
+                if (accumulator == 0) {
+                    programCounter = operand;
+                }
+
+                break;
+            // Branches always
+            case "BRA":
+                programCounter = operand;
                 break;
         }
 
