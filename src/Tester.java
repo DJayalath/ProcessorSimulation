@@ -13,6 +13,11 @@ public class Tester {
     }
 
     /**
+     * Mask for operand (8-bits)
+     */
+    private char OPERAND_MASK = 0xFF;
+
+    /**
      * Runs tests for processor
      */
     public void runTests() {
@@ -21,6 +26,9 @@ public class Tester {
 
         System.out.print("Running compile, load and store test... ");
         System.out.print((compileLoadAndStore()) ? "SUCCESS!\n" : "FAIL!\n");
+
+        System.out.print("Running add test... ");
+        System.out.print((addTest()) ? "SUCCESS!\n" : "FAIL!\n");
     }
 
     /**
@@ -45,10 +53,7 @@ public class Tester {
         processor.cycle();
 
         // Check that -1 has been stored in address 64
-        if (memory.getWord((byte) 64) == (char) 0b0111111110000000)
-            return true;
-
-        return false;
+        return readOperand(memory.getWord((byte) 64)) == -1;
     }
 
     /**
@@ -71,10 +76,34 @@ public class Tester {
         processor.cycle();
 
         // Check that -1 has been stored in address 64
-        if (memory.getWord((byte) 64) == (char) 0b0111111110000000)
-            return true;
+        return readOperand(memory.getWord((byte) 64)) == -1;
+    }
 
-        return false;
+    /**
+     * Tries 'addTest.s' to do 5 + 10 through
+     * direct addressing and temporary storage
+     * @return True on success
+     */
+    private boolean addTest() {
+
+        // Initialise memory, processor and compiler
+        Memory memory = new Memory();
+        Compiler compiler = new Compiler(memory);
+        Processor processor = new Processor(memory);
+
+        compiler.compile("addTest.s");
+
+        processor.run();
+
+        return readOperand(memory.getWord((byte) 51)) == 15;
+    }
+
+    /**
+     * Utility function for reading data from memory
+     */
+    private byte readOperand(char bitPattern) {
+        // Get operand (bits 1-8)
+        return (byte) ((bitPattern >> 7) & OPERAND_MASK);
     }
 
 }
