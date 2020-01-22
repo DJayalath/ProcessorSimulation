@@ -9,27 +9,19 @@ Example:
 - Run: `java Main fibonacci.s`
 
 ### Single operand instruction set (similar to LMC)
-LDA = load into accumulator
-
-STA = store in memory
-
-ADD = add to accumulator
-
-SUB = subtract from accumulator
-
-MUL = multiply with accumulator
-
-DIV = divide accumulator by
-
-BRP = branch if accumulator positive
-
-BRZ = branch if accumulator zero
-
-BRA = branch always
-
-OUT = print accumulator value
-
-END = end of program
+| Assembler  | Action | Description |
+| ------------- | ------------- | ------------- |
+| LDA <Operand>  | acc := Operand  | Load into accumulator
+| STA <Operand>  | memory[Operand] := acc  | Store in memory
+| ADD <Operand> | acc := acc + Operand | Add to accumulator
+| SUB <Operand> | acc := acc - Operand | Subtract from accumulator
+| MUL <Operand> | acc := acc * Operand | Multiply with accumulator
+| DIV <Operand> | acc := acc / Operand | Divide accumulator by
+| BRP <Operand> | pc := Operand IF acc > 0 | Branch to line if accumulator positive
+| BRZ <Operand> | pc := Operand IF acc == 0 | Branch to line if accumulator zero
+| BRA <Operand> | pc := Operand | Branch always to line
+| OUT | PRINT acc | Print contents of accumulator
+| END | END | End of program
 
 ### Addressing modes
 - Immediate addressing = prefix number with '#'
