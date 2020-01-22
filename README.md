@@ -1,5 +1,5 @@
 # ProcessorSimulation
-A Java simulation for a simple accumulator ISA processor
+A Java simulation for a simple 16-bit accumulator ISA processor
 
 ### Usage
 Compile then run the `Main` class and provide the 'assembly' file to run as the first command line argument.
