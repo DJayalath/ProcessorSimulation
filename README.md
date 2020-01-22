@@ -41,5 +41,9 @@ The system word size is 16 bits. The 0th bit (MSB) is an addressing mode flag, b
 represent the **signed integer operand** (range -128 to 127), and bits 9-12 represent the opcode.
 Bits 13-15 are padded zero bits.
 
+| 0 | 1 - 8 | 9 - 12 | 13 - 15 |
+| --- | --- | ------ | ------- |
+| Addressing Mode Flag | Signed Integer Operand | Opcode | Padded zero bits |
+
 ### Examples
 See `fibonacci.s` for a program that prints the first 11 fibonacci numbers.
