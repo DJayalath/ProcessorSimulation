@@ -13,7 +13,7 @@ public class Processor {
     /**
      * Mask for direct addressing mode flag (MSB = 1)
      */
-    private char DIRECT_ADDRESS_MASK = 0x1000;
+    private char DIRECT_ADDRESS_MASK = 0x8000;
 
     /**
      * Mask for operand (8-bits)
@@ -56,6 +56,11 @@ public class Processor {
     private byte accumulator = 0;
 
     /**
+     * Simulates status register
+     */
+    private byte status = 0;
+
+    /**
      * Assign reference to computer memory and get
      * and instance of the opcode lookup table
      * @param memory Reference to memory instance
@@ -71,8 +76,9 @@ public class Processor {
      */
     public void run() {
 
-        // TODO: Loop.
-        cycle();
+        while (status == 0) {
+            cycle();
+        }
 
     }
 
@@ -103,7 +109,7 @@ public class Processor {
         operand = (byte) ((currentInstruction >> 7) & OPERAND_MASK);
 
         // If direct addressing used (bit 0 == 1), get operand from address
-        if ((currentInstruction & DIRECT_ADDRESS_MASK) == 1) {
+        if ((currentInstruction & DIRECT_ADDRESS_MASK) == DIRECT_ADDRESS_MASK) {
             operand = (byte) ((memory.getWord(operand) >> 7) & OPERAND_MASK);
         }
 
@@ -151,6 +157,14 @@ public class Processor {
             // Divide accumulator by operand
             case "DIV":
                 accumulator /= operand;
+                break;
+            // Print contents of accumulator
+            case "OUT":
+                System.out.println(accumulator);
+                break;
+            // Sets status register to end execution code
+            case "END":
+                status = 1;
                 break;
         }
 
