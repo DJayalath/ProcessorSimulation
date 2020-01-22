@@ -32,6 +32,9 @@ public class Tester {
 
         System.out.print("Running branch test... ");
         System.out.print((branchTest()) ? " SUCCESS!\n" : " FAIL!\n");
+
+        System.out.print("Running fibonacci test... ");
+        System.out.print((fibonacciTest()) ? " SUCCESS!\n" : " FAIL!\n");
     }
 
     /**
@@ -117,6 +120,25 @@ public class Tester {
         processor.run();
 
         return readOperand(memory.getWord((byte) 50)) == 0;
+    }
+
+    /**
+     * Prints the first 11 fibonacci numbers. Can't go further
+     * because it would cause an overflow.
+     * @return True on success
+     */
+    private boolean fibonacciTest() {
+
+        // Initialise memory, processor and compiler
+        Memory memory = new Memory();
+        Compiler compiler = new Compiler(memory);
+        Processor processor = new Processor(memory);
+
+        compiler.compile("fibonacci.s");
+
+        processor.run();
+
+        return readOperand(memory.getWord((byte) 99)) == 89;
     }
 
     /**
