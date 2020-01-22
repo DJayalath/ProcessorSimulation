@@ -27,7 +27,7 @@ public class Compiler {
      * and gets an instance of the opcode lookup table
      */
     public Compiler(Memory memory) {
-        lineBuffer = new ArrayList<String>();
+        lineBuffer = new ArrayList<>();
         this.memory = memory;
         opcodeTable = OpcodeTable.getInstance();
     }
@@ -72,7 +72,13 @@ public class Compiler {
             String line = lineBuffer.get(i);
 
             // Split into opcode/operand
-            String instruction[] = line.split(" ");
+            String[] splitLine = line.split(" ");
+
+            String[] instruction = new String[2];
+            instruction[0] = splitLine[0];
+
+            // Place a zero value if line doesn't have operand
+            instruction[1] = (splitLine.length < 2) ? "#0" : splitLine[1];
 
             // Lookup machine code from mnemonic opcode
             byte opcode = opcodeTable.getBitPattern(instruction[0]);
