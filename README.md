@@ -1,6 +1,13 @@
 # ProcessorSimulation
 A Java simulation for a simple accumulator ISA processor
 
+## Usage
+Compile then run the `Main` class and provide the 'assembly' file to run as the first command line argument.
+
+Example:
+- Compile: `javac Main.java`
+- Run: `java Main fibonacci.s`
+
 ## Instruction Set Architecture
 ### Single operand instruction set (similar to LMC)
 LDA = load into accumulator
