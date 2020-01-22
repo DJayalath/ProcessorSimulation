@@ -1,2 +1,3 @@
 LDA #-1
 STA #64
+END
